@@ -1,0 +1,29 @@
+[project]
+name = "streamlit2stlite"
+version = "0.1.0"
+description = "Convert Streamlit Python apps to stlite HTML apps"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+streamlit2stlite = "streamlit2stlite.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/USERNAME/streamlit2stlite"
+"Bug Tracker" = "https://github.com/USERNAME/streamlit2stlite/issues"
+
+[tool.setuptools]
+packages = ["streamlit2stlite"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
