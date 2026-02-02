@@ -8,6 +8,8 @@
 
 ## 🎮 Try it now!
 
+https://github.com/user-attachments/assets/af1f3895-298c-4462-bceb-064c1103a858
+
 Don't want to install anything yet? specific files are included in this repository that you can download and run immediately:
 
 *   **[Converter Tool](converter_app.html)** (`converter_app.html`): A self-contained tool that lets you upload and convert other Streamlit apps to HTML directly in your browser.
