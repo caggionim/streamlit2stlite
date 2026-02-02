@@ -91,6 +91,8 @@ options:
   -t, --title           Title for the HTML page
   --add-requirements    Additional packages to add to auto-detected ones
   -v, --verbose         Print verbose output
+```
+
 ## ⚠️ Limitations
 
 While running Python in the browser is magical, it has some constraints you should be aware of:
