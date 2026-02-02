@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Streamlit to Stlite Converter</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.0.0/build/stlite.css"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.0.0/build/stlite.js";
+
+      // The Streamlit application code is defined here
+      const streamlit_app_code = `import streamlit as st
+from streamlit2stlite.core import convert_streamlit_to_stlite, extract_imports
+
+st.set_page_config(page_title="Streamlit to Stlite Converter", layout="wide")
+
+st.title("Streamlit to Stlite Converter")
+st.markdown("""
+Upload your Streamlit Python file (\`.py\`) below to convert it into a standalone HTML file powered by [stlite](https://github.com/whitphx/stlite).
+""")
+
+uploaded_file = st.file_uploader("Upload your Streamlit App (.py)", type=["py"])
+
+if uploaded_file is not None:
+    # Read the file content
+    python_code = uploaded_file.getvalue().decode("utf-8")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Source Code")
+        st.code(python_code, language="python")
+        
+    with col2:
+        st.subheader("Configuration")
+        
+        # Auto-detect title
+        title = st.text_input("App Title", value="My Stlite App")
+        
+        # Requirements
+        detected_reqs = extract_imports(python_code)
+        st.info(f"Auto-detected requirements: {', '.join(detected_reqs) if detected_reqs else 'None'}")
+        
+        # Allow user to modify requirements
+        requirements_str = st.text_area(
+            "Requirements (comma-separated)", 
+            value=", ".join(detected_reqs),
+            help="List of pip packages to install (e.g., pandas, numpy)."
+        )
+        
+        requirements = [r.strip() for r in requirements_str.split(",") if r.strip()]
+        
+        st.divider()
+        
+        if st.button("Convert to HTML", type="primary"):
+            try:
+                html_content = convert_streamlit_to_stlite(
+                    python_code=python_code,
+                    title=title,
+                    requirements=requirements
+                )
+                
+                st.success("Conversion successful!")
+                
+                # Create download button
+                st.download_button(
+                    label="Download HTML",
+                    data=html_content,
+                    file_name=uploaded_file.name.replace(".py", ".html"),
+                    mime="text/html"
+                )
+            except Exception as e:
+                st.error(f"An error occurred during conversion: {e}")
+`;
+      // Mount the stlite app with the specified requirements and files
+      mount(
+        {
+          requirements: ["streamlit2stlite"], // Packages to install
+          entrypoint: "streamlit_app.py", // This field is required
+          files: {
+            "streamlit_app.py": streamlit_app_code,
+          },
+        },
+        document.getElementById("root"),
+      );
+    </script>
+  </body>
+</html>
