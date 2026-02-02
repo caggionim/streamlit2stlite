@@ -147,7 +147,7 @@ def extract_imports(python_code: str) -> List[str]:
         'lmfit': ['scipy'],           # lmfit needs scipy
         'tadatakit': ['pydantic'],    # tadatakit needs pydantic
         'plotly': [],
-        'pandas': ['xlsxwriter'],
+        'pandas': ['xlsxwriter', 'openpyxl'],
         'numpy': [],
         'matplotlib': [],
     }

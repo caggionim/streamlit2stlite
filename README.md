@@ -6,6 +6,18 @@
 
 > 💡 Perfect for sharing data dashboards, prototypes, and tools with colleagues or clients who don't have Python installed.
 
+## 🎮 Try it now!
+
+Don't want to install anything yet? specific files are included in this repository that you can download and run immediately:
+
+*   **[Converter Tool](converter_app.html)** (`converter_app.html`): A self-contained tool that lets you upload and convert other Streamlit apps to HTML directly in your browser.
+*   **[Example App](example_app.html)** (`example_app.html`): A simple demo showing what the output looks like.
+
+**To use them:**
+1.  Click the link above (or navigate to the file in the repo).
+2.  Download the raw file (on GitHub, click "Download raw file" button).
+3.  Open the downloaded `.html` file in Chrome, Edge, or Firefox.
+
 ## 🚀 Quick Start
 
 1.  **Install** the tool:
@@ -77,7 +89,17 @@ options:
   -t, --title           Title for the HTML page
   --add-requirements    Additional packages to add to auto-detected ones
   -v, --verbose         Print verbose output
-```
+## ⚠️ Limitations
+
+While running Python in the browser is magical, it has some constraints you should be aware of:
+
+*   **Library Support**: You can only use:
+    *   **Pure Python** packages found on PyPI (packages that don't require C compilation).
+    *   **Scientific packages** expressly ported to Pyodide (e.g., `numpy`, `pandas`, `scipy`, `matplotlib`, `scikit-learn`).
+    *   *System-level* packages like `opencv-python` (cv2) or complex compiled libraries that haven't been ported will **NOT** work.
+*   **Performance**: Code runs in the browser, so it's generally slower than native Python. Heavy data processing might lag the UI.
+*   **Networking**: Standard `requests` won't work due to browser CORS security. You must use `pyodide.http` or libraries that wrap the browser's `fetch` API.
+*   **File System**: No direct access to the user's local hard drive. Use `st.file_uploader` and `st.download_button` to interact with files.
 
 ## ❓ FAQ
 

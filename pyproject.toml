@@ -18,8 +18,8 @@ dev = ["pytest"]
 streamlit2stlite = "streamlit2stlite.cli:main"
 
 [project.urls]
-"Homepage" = "https://github.com/USERNAME/streamlit2stlite"
-"Bug Tracker" = "https://github.com/USERNAME/streamlit2stlite/issues"
+"Homepage" = "https://github.com/caggionim/streamlit2stlite"
+"Bug Tracker" = "https://github.com/caggionim/streamlit2stlite/issues"
 
 [tool.setuptools]
 packages = ["streamlit2stlite"]
